@@ -1,0 +1,405 @@
+/* ============================================
+   GLOBAL BASE STYLES
+============================================ */
+
+/* Global variable for consistent margins */
+:root {
+  --page-margin: 8rem;          /* main left/right margin for content */
+  --page-margin-half: 4rem;     /* used for scroll sections */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+  padding-top: 4rem; /* Adjusted for standard header height */
+  overflow-x: hidden;
+}
+
+/* ============================================
+   GLOBAL CONTAINERS
+============================================ */
+
+/* Generic container, used in footer */
+.container {
+  max-width: none !important;
+  margin-left: var(--page-margin);
+  margin-right: var(--page-margin);
+  padding: 0;
+}
+
+/* Main content container for alignment */
+.content-container {
+  max-width: none;
+  margin-left: var(--page-margin);
+  margin-right: var(--page-margin);
+  padding: 0 1.5rem;
+}
+
+
+/* Responsive tuning */
+@media (max-width: 1280px) {
+  :root {
+    --page-margin: 4rem;
+    --page-margin-half: 2rem;
+  }
+}
+@media (max-width: 768px) {
+  :root {
+    --page-margin: 1.5rem;
+    --page-margin-half: 1rem;
+  }
+  .content-container, #main-header .container, .site-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* ============================================
+   HEADER
+============================================ */
+/* OUTER BOX: Full-width and solid */
+#main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+#main-header.header-scrolled {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   FIX FOR STICKY HEADER SCROLL ANCHOR
+============================================ */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* ============================================
+   TOP IMAGE CAROUSEL & EXCEPTION SECTIONS
+============================================ */
+.carousel-section, .features-section {
+  padding: 2rem 0;
+  margin-left: var(--page-margin-half);
+  margin-right: var(--page-margin-half);
+}
+
+.stacked-layout.video-section {
+  margin-left: var(--page-margin-half);
+  margin-right: var(--page-margin-half);
+}
+
+.stacked-layout .text-content-stacked {
+    padding-top: 2rem;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1.5rem;
+}
+
+/* ✅ CHANGED FOR SMOOTH SCROLL */
+.carousel-slides {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 10rem;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+.carousel-slides::-webkit-scrollbar { display: none; }
+
+/* ✅ CHANGED FOR SMOOTH SCROLL */
+.carousel-slide {
+  flex: 0 0 calc(100% - 20rem);
+  scroll-snap-align: center;
+}
+
+.slide-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  height: 600px;
+  padding: 0 4rem;
+  background-color: #e7ecf3;
+}
+
+.image-content {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* ============================================
+   FEATURE SCROLLER & PROGRESS BARS
+============================================ */
+.features-scroller {
+  display: flex;
+  gap: 2rem;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+}
+.features-scroller::-webkit-scrollbar { display: none; }
+
+.feature-card {
+  flex: 0 0 330px;
+  height: 310px;
+  border-radius: 3rem;
+  overflow: hidden;
+ padding-top: 2rem;
+padding-bottom: 2rem;
+padding-left: 2rem;
+padding-right: 2rem;
+  background: white;
+  box-shadow: none;
+}
+
+.feature-card img,
+.feature-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+
+/* --- UNIVERSAL PROGRESS BAR STYLES --- */
+.progress-bar {
+  max-width: 400px;
+  margin: 2rem auto 0;
+}
+.progress-bar .progress-track {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  background-color: #e0e0e0;
+  border-radius: 1.5px;
+  cursor: pointer;
+  transition: height 0.2s ease-in-out;
+}
+
+.progress-bar .progress-track:hover,
+.progress-bar .progress-track.dragging {
+    height: 6px;
+}
+
+.progress-bar .progress-indicator {
+  position: absolute;
+  height: 100%;
+  background-color: #333;
+  border-radius: 1.5px;
+}
+
+.carousel-btn {
+    display: none;
+}
+
+/* ============================================
+   VIDEO SECTIONS
+============================================ */
+.video-section {
+  padding: 2rem 0;
+  min-height: 60vh;
+  display: grid;
+  align-items: center;
+}
+.video-container {
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+.video-container video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.play-pause-btn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border: none;
+  cursor: pointer;
+}
+.play-pause-btn:hover, .play-pause-btn:focus {
+  opacity: 1;
+}
+.play-pause-btn svg {
+  width: 4rem;
+  height: 4rem;
+  color: white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* ============================================
+   PROFESSIONAL GRID LAYOUTS
+============================================ */
+.statement-section, .feeling-section {
+  padding: 2rem 0;
+}
+
+.statement-grid img, .feeling-grid img {
+    border-radius: 1.5rem;
+    max-width: 100%;
+    height: auto;
+}
+
+/* --- "A phone designed..." Grid --- */
+.statement-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.statement-grid .left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.statement-grid .right-column {
+    align-self: center;
+}
+@media (min-width: 768px) {
+  .statement-grid {
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: auto 1fr;
+  }
+  .statement-grid .grid-item-1 { grid-column: 1 / -1; }
+  .statement-grid .left-column { grid-column: 1 / 2; grid-row: 2 / 3; }
+  .statement-grid .right-column { grid-column: 2 / 3; grid-row: 2 / 3; }
+  .statement-grid .grid-item-4 {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+    max-width: 45ch;
+    padding-top: 2rem;
+  }
+}
+
+/* Styles for the GSAP zoom effect */
+.image-zoom-container {
+  overflow: hidden; /* This is the key: it crops the zooming image */
+  border-radius: 1.5rem; /* Match the border-radius of other images */
+}
+
+.image-zoom-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Gives the browser a heads-up to optimize for transform animations */
+  will-change: transform; 
+}
+/* --- "New phone feeling" Grid --- */
+.feeling-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+.feeling-grid .right-column-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+@media (min-width: 768px) {
+    .feeling-grid {
+        grid-template-columns: 1.5fr 1fr;
+    }
+}
+
+
+/* ============================================
+   FOOTER
+============================================ */
+.site-footer {
+  background-color: #f8f9fa;
+  padding: 4rem 1.5rem 2rem;
+  font-size: 0.9rem;
+  color: #5f6368;
+  margin-left: var(--page-margin);
+  margin-right: var(--page-margin);
+  border-radius: 2rem;
+}
+.footer-top {
+  border-bottom: 1px solid #dadce0;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .footer-links {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.footer-links a { text-decoration: none; color: inherit; }
+.footer-links a:hover { text-decoration: underline; color: #202124; }
+.footer-bottom {
+  border-top: 1px solid #dadce0;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.footer-socials a { color: inherit; }
+.footer-socials a:hover { color: #202124; }
+
+
+/* ============================================
+   NEW HIGH-END HEADLINE FONT
+============================================ */
+[data-anim="text-reveal"] {
+    font-family: 'Inconsolata', monospace;
+    font-weight: 200; /* Use the regular weight we downloaded */
+    letter-spacing: -1px; /* Monospace fonts often look better slightly tighter */
+    display: block; /* Ensures spans wrap correctly */
+}
